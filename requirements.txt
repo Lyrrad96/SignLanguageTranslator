@@ -1,5 +1,5 @@
+streamlit
 streamlit-webrtc
-streamlit -q
 numpy
 Pillow
 !pip install av
