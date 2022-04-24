@@ -1,14 +1,8 @@
-
 import streamlit as st
-import mediapipe as mp
 import av
-import cv2
 import numpy as np
-import tempfile 
-import time 
 from PIL import Image
-from object_detection.utils import label_map_util
-from streamlit_webrtc import webrtc_streamer, RTCConfiguration
+from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
 import threading
 
 #Tab Heading and Icon
@@ -19,17 +13,17 @@ app_mode = st.sidebar.selectbox('Choose the model to use',['Resnet50', 'VGG16', 
 
 
 st.title('Sign Language Translator')
+st.title("Webcam Live Feed")
 
-#Video Stream using opencv
+#Video Stream 
 class VideoProcessor(VideoProcessorBase):
-    def __init__(self):
-        self.style = 'color'
-def recv(self, frame):
-        img = frame.to_ndarray(format="bgr24")
-        
-        # image processing code here
-    
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
+  def __init__(self):
+    self.style = 'color'
+  def recv(self, frame):
+    img = frame.to_ndarray(format="bgr24")
+       
+    # image processing code here
+    return av.VideoFrame.from_ndarray(img, format="bgr24")
 webrtc_streamer(key="vpf", video_processor_factory=VideoProcessor)
 
 st.markdown (
@@ -70,7 +64,6 @@ def image_resize(image, width=None, height=None, inter =cv2.INTER_AREA):
     #resize
     resized = cv2.resize(image, dim, interpolation=inter)
     return resized
-st.title("Webcam Live Feed")
 
 if app_mode == 'Resnet50':
  None
