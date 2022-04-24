@@ -1,0 +1,7 @@
+streamlit-webrtc
+streamlit -q
+numpy
+Pillow
+!pip install av
+thread6
+opencv-python
