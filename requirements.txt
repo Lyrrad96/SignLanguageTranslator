@@ -2,6 +2,6 @@ streamlit
 streamlit-webrtc
 numpy
 Pillow
-!pip install av
+av
 thread6
 opencv-python
