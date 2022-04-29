@@ -5,3 +5,5 @@ Pillow
 av
 thread6
 opencv-python
+keras
+tensorflow
