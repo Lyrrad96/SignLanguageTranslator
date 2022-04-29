@@ -77,7 +77,6 @@
 
 #Writes the following code to a file and stores it in the file system on the left
 
-%%writefile app.py
 import streamlit as st
 import av
 import cv2
@@ -85,7 +84,7 @@ import numpy as np
 from PIL import Image
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
 import threading
-from google.colab.patches import cv2_imshow
+# from google.colab.patches import cv2_imshow
 # ##
 
 # from IPython.display import display, Javascript
