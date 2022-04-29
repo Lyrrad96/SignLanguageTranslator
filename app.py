@@ -1,9 +1,15 @@
 # import numpy as np
 # from keras.models import model_from_json
-# import operator
-# import cv2
-# import sys, os
+import operator
+import cv2
+import sys, os
 
+import streamlit as st
+import av
+mport numpy as np
+from PIL import Image
+from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
+import threading
 # # Loading the model
 # json_file = open("vgg-aug_model.json", "r")
 # model_json = json_file.read()
@@ -20,29 +26,29 @@
 #                 10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S', 19: 'T', 20: 'U', 21: 'V',
 #                 22: 'W', 23: 'X', 24: 'Y', 25: 'Z', 26: 'del', 27: 'nothing', 28: 'space',}
 
-# while True:
-#     _, frame = cap.read()
-#     # Simulating mirror image
-#     frame = cv2.flip(frame, 1)
+while True:
+    _, frame = cap.read()
+    # Simulating mirror image
+    frame = cv2.flip(frame, 1)
     
-#     # Got this from collect-data.py
-#     # Coordinates of the ROI
-#     x1 = int(0.5*frame.shape[1])
-#     y1 = 10
-#     x2 = frame.shape[1]-10
-#     y2 = int(0.5*frame.shape[1])
-#     # Drawing the ROI
-#     # The increment/decrement by 1 is to compensate for the bounding box
-#     cv2.rectangle(frame, (x1-1, y1-1), (x2+1, y2+1), (255,0,0) ,1)
-#     # Extracting the ROI
-#     roi = frame[y1:y2, x1:x2]
+    # Got this from collect-data.py
+    # Coordinates of the ROI
+    x1 = int(0.5*frame.shape[1])
+    y1 = 10
+    x2 = frame.shape[1]-10
+    y2 = int(0.5*frame.shape[1])
+    # Drawing the ROI
+    # The increment/decrement by 1 is to compensate for the bounding box
+    cv2.rectangle(frame, (x1-1, y1-1), (x2+1, y2+1), (255,0,0) ,1)
+    # Extracting the ROI
+    roi = frame[y1:y2, x1:x2]
     
-#     # Resizing the ROI so it can be fed to the model for prediction
-#     roi = cv2.resize(roi, (64, 64)) 
-#     #roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-#     _, test_image = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
-#     cv2.imshow("test", test_image)
-#     # Batch of 1
+    # Resizing the ROI so it can be fed to the model for prediction
+    roi = cv2.resize(roi, (64, 64)) 
+    #roi = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+    _, test_image = cv2.threshold(roi, 120, 255, cv2.THRESH_BINARY)
+    cv2.imshow("test", test_image)
+    # Batch of 1
 #     result = loaded_model.predict(test_image.reshape(1, 64, 64, 3))
 #     prediction = {'A': result[0][0], 'B': result[0][1], 
 #                   'C': result[0][2], 'D': result[0][3],
@@ -72,18 +78,11 @@
 #         break
         
  
-# cap.release()
-# cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows()
 
 #Writes the following code to a file and stores it in the file system on the left
 
-import streamlit as st
-import av
-import cv2
-import numpy as np
-from PIL import Image
-from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
-import threading
 # from google.colab.patches import cv2_imshow
 # ##
 
@@ -258,28 +257,28 @@ def image_resize(image, width=None, height=None, inter =cv2.INTER_AREA):
 # import the opencv library
 
 
-# define a video capture object
-vid = cv2.VideoCapture(0)
+# # define a video capture object
+# vid = cv2.VideoCapture(0)
 
-while(True):
+# while(True):
 	
-	# Capture the video frame
-	# by frame
-	ret, frame = vid.read()
+# 	# Capture the video frame
+# 	# by frame
+# 	ret, frame = vid.read()
 
-	# Display the resulting frame
-	cv2.imshow('frame', frame)
+# 	# Display the resulting frame
+# 	cv2.imshow('frame', frame)
 	
-	# the 'q' button is set as the
-	# quitting button you may use any
-	# desired button of your choice
-	if cv2.waitKey(1) & 0xFF == ord('q'):
-		break
+# 	# the 'q' button is set as the
+# 	# quitting button you may use any
+# 	# desired button of your choice
+# 	if cv2.waitKey(1) & 0xFF == ord('q'):
+# 		break
 
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
+# # After the loop release the cap object
+# vid.release()
+# # Destroy all the windows
+# cv2.destroyAllWindows()
 
 
 if app_mode == 'Resnet50':
