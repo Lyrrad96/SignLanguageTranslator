@@ -203,58 +203,83 @@ def image_resize(image, width=None, height=None, inter =cv2.INTER_AREA):
     resized = cv2.resize(image, dim, interpolation=inter)
     return resized
 
-####HERE
-#start button
-use_webcam = st.sidebar.button('Use Webcam')
-#empty frame
-stframe = st.empty()
-video_file_buffer = st.sidebar.file_uploader("Upload", type = ['mp4'])
+# ####HERE
+# #start button
+# use_webcam = st.sidebar.button('Use Webcam')
+# #empty frame
+# stframe = st.empty()
+# video_file_buffer = st.sidebar.file_uploader("Upload", type = ['mp4'])
 
-# tffile = tempfile.NamedTemporaryFile(delete = false)
+# # tffile = tempfile.NamedTemporaryFile(delete = false)
 
-# if not video_file_buffer:
-#   if use_webcam:
+# # if not video_file_buffer:
+# #   if use_webcam:
+# vid = cv2.VideoCapture(0)
+# #   else:
+# #     vid = cv2.VideoCapture(DEMO)
+# #     tffile.name = DEMO
+# # else:
+# #   tffile.write(video_file_buffer.read())
+# #   vid = cv2.VideoCapture(tffile.name)
+# width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
+# height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
+# fps_input = int(vid.get(cv2.CAP_PROP_FPS))
+# print("WAWHOPSSSAP")
+
+# i = 0
+# while vid.isOpened():
+#   i += 1
+#   ret, frame = vid.read()
+#   print(vid.read())
+#   print("WAWHOPSSSAP")
+#   print("res", ret, frame)
+#   if not ret:
+#     continue
+
+# frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+# #results = face_mesh.process(frame)
+# frame.flags.writeable = True
+# frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
+
+# frame = cv2.resize(frame, (0, 0), fx = 0.8, fy = 0.8)
+# frame = image_resize(image = frame, width = 640)
+# stframe.image_(frame, channels = "BGR", use_column_width = True)
+
+# # while(True):
+# #     ret, frame = vid.read()
+# #     cv2_imshow(vid)
+# #     if cv2.waitKey(1) & 0xFF == ord('q'):
+# #         break
+
+# vid.release()
+# # cv2.destroyAllWindows()
+
+# import the opencv library
+
+
+# define a video capture object
 vid = cv2.VideoCapture(0)
-#   else:
-#     vid = cv2.VideoCapture(DEMO)
-#     tffile.name = DEMO
-# else:
-#   tffile.write(video_file_buffer.read())
-#   vid = cv2.VideoCapture(tffile.name)
-width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-fps_input = int(vid.get(cv2.CAP_PROP_FPS))
-print("WAWHOPSSSAP")
 
-i = 0
-while vid.isOpened():
-  i += 1
-  ret, frame = vid.read()
-  print(vid.read())
-  print("WAWHOPSSSAP")
-  print("res", ret, frame)
-  if not ret:
-    continue
+while(True):
+	
+	# Capture the video frame
+	# by frame
+	ret, frame = vid.read()
 
-frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-#results = face_mesh.process(frame)
-frame.flags.writeable = True
-frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+	# Display the resulting frame
+	cv2.imshow('frame', frame)
+	
+	# the 'q' button is set as the
+	# quitting button you may use any
+	# desired button of your choice
+	if cv2.waitKey(1) & 0xFF == ord('q'):
+		break
 
-
-frame = cv2.resize(frame, (0, 0), fx = 0.8, fy = 0.8)
-frame = image_resize(image = frame, width = 640)
-stframe.image_(frame, channels = "BGR", use_column_width = True)
-
-# while(True):
-#     ret, frame = vid.read()
-#     cv2_imshow(vid)
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
-
+# After the loop release the cap object
 vid.release()
-# cv2.destroyAllWindows()
-
+# Destroy all the windows
+cv2.destroyAllWindows()
 
 
 if app_mode == 'Resnet50':
