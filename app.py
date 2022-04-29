@@ -6,7 +6,7 @@ import sys, os
 
 import streamlit as st
 import av
-mport numpy as np
+import numpy as np
 from PIL import Image
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, RTCConfiguration
 import threading
