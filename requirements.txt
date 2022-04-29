@@ -4,6 +4,6 @@ numpy
 Pillow
 av
 thread6
-opencv-python
+opencv-python-headless==4.5.3.56
 keras
 tensorflow
